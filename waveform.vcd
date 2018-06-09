@@ -1,0 +1,73 @@
+$date
+	Tue Jun  5 22:27:26 2018
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module simple_fifo $end
+$var wire 1 ! clk $end
+$var wire 16 " data_in [15:0] $end
+$var wire 1 # pop $end
+$var wire 1 $ push $end
+$var wire 1 % reset_n $end
+$var reg 16 & data_out [15:0] $end
+$var reg 1 ' empty $end
+$var reg 1 ( full $end
+$var reg 3 ) rd_ptr [2:0] $end
+$var reg 3 * wr_ptr [2:0] $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b0 *
+b0 )
+0(
+1'
+bx &
+0%
+z$
+z#
+bz "
+1!
+$end
+#500
+0!
+#1000
+1!
+#1500
+0!
+#2000
+1!
+#2500
+0!
+#3000
+1!
+#3500
+0!
+#4000
+1!
+1%
+#4500
+0!
+#5000
+1#
+1$
+b1011000000011110 "
+1!
+#5500
+0!
+#6000
+0#
+0$
+1'
+b1 )
+b1 *
+1!
+#6500
+0!
+#7000
+1!
+#7001

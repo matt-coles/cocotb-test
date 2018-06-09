@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuites name="results">
+  <testsuite name="all" package="all" tests="0">
+    <property name="random_seed" value="1528234046" />
+    <testcase classname="test_simple_fifo" name="random_test" ratio_time="967.8099701394153" sim_time_ns="7.001" time="0.007233858108520508">
+      <failure message="Test failed with random_seed=1528234046" stderr="" stdout="'Send raised exception: Unable to resolve to binary &gt;xxxxxxxxxxxxxxxx&lt;'" />
+    </testcase>
+  </testsuite>
+</testsuites>

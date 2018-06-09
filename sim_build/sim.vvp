@@ -1,0 +1,126 @@
+#! /usr/bin/vvp
+:ivl_version "10.1 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "system";
+:vpi_module "vhdl_sys";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_0x55ab1b51d2c0 .scope module, "simple_fifo" "simple_fifo" 2 5;
+ .timescale -10 -12;
+    .port_info 0 /INPUT 1 "clk"
+    .port_info 1 /INPUT 1 "reset_n"
+    .port_info 2 /INPUT 1 "push"
+    .port_info 3 /INPUT 1 "pop"
+    .port_info 4 /INPUT 16 "data_in"
+    .port_info 5 /OUTPUT 16 "data_out"
+    .port_info 6 /OUTPUT 1 "full"
+    .port_info 7 /OUTPUT 1 "empty"
+P_0x55ab1b4dd090 .param/l "DEPTH" 0 2 6, +C4<00000000000000000000000000001000>;
+P_0x55ab1b4dd0d0 .param/l "WIDTH" 0 2 7, +C4<00000000000000000000000000010000>;
+o0x7f75eb51b018 .functor BUFZ 1, C4<z>; HiZ drive
+v0x55ab1b51d5b0_0 .net "clk", 0 0, o0x7f75eb51b018;  0 drivers
+v0x55ab1b53d5b0 .array "data", 0 7, 15 0;
+o0x7f75eb51b048 .functor BUFZ 16, C4<zzzzzzzzzzzzzzzz>; HiZ drive
+v0x55ab1b53d670_0 .net "data_in", 15 0, o0x7f75eb51b048;  0 drivers
+v0x55ab1b53d760_0 .var "data_out", 15 0;
+v0x55ab1b53d840_0 .var "empty", 0 0;
+v0x55ab1b53d950_0 .var "full", 0 0;
+o0x7f75eb51b108 .functor BUFZ 1, C4<z>; HiZ drive
+v0x55ab1b53da10_0 .net "pop", 0 0, o0x7f75eb51b108;  0 drivers
+o0x7f75eb51b138 .functor BUFZ 1, C4<z>; HiZ drive
+v0x55ab1b53dad0_0 .net "push", 0 0, o0x7f75eb51b138;  0 drivers
+v0x55ab1b53db90_0 .var "rd_ptr", 2 0;
+o0x7f75eb51b198 .functor BUFZ 1, C4<z>; HiZ drive
+v0x55ab1b53dc70_0 .net "reset_n", 0 0, o0x7f75eb51b198;  0 drivers
+v0x55ab1b53dd30_0 .var "wr_ptr", 2 0;
+E_0x55ab1b5139c0 .event posedge, v0x55ab1b51d5b0_0;
+    .scope S_0x55ab1b51d2c0;
+T_0 ;
+    %wait E_0x55ab1b5139c0;
+    %load/vec4 v0x55ab1b53dc70_0;
+    %inv;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_0.0, 8;
+    %pushi/vec4 0, 0, 3;
+    %assign/vec4 v0x55ab1b53db90_0, 0;
+    %pushi/vec4 0, 0, 3;
+    %assign/vec4 v0x55ab1b53dd30_0, 0;
+    %pushi/vec4 0, 0, 1;
+    %assign/vec4 v0x55ab1b53d950_0, 0;
+    %pushi/vec4 1, 0, 1;
+    %assign/vec4 v0x55ab1b53d840_0, 0;
+    %jmp T_0.1;
+T_0.0 ;
+    %load/vec4 v0x55ab1b53dad0_0;
+    %load/vec4 v0x55ab1b53d950_0;
+    %inv;
+    %and;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_0.2, 8;
+    %load/vec4 v0x55ab1b53d670_0;
+    %load/vec4 v0x55ab1b53dd30_0;
+    %pad/u 5;
+    %ix/vec4 3;
+    %ix/load 4, 0, 0; Constant delay
+    %assign/vec4/a/d v0x55ab1b53d5b0, 0, 4;
+    %load/vec4 v0x55ab1b53dd30_0;
+    %addi 1, 0, 3;
+    %store/vec4 v0x55ab1b53dd30_0, 0, 3;
+    %load/vec4 v0x55ab1b53dd30_0;
+    %load/vec4 v0x55ab1b53db90_0;
+    %cmp/e;
+    %jmp/0xz  T_0.4, 4;
+    %pushi/vec4 1, 0, 1;
+    %assign/vec4 v0x55ab1b53d950_0, 0;
+    %jmp T_0.5;
+T_0.4 ;
+    %pushi/vec4 0, 0, 1;
+    %assign/vec4 v0x55ab1b53d840_0, 0;
+T_0.5 ;
+T_0.2 ;
+    %load/vec4 v0x55ab1b53da10_0;
+    %load/vec4 v0x55ab1b53d840_0;
+    %inv;
+    %and;
+    %load/vec4 v0x55ab1b53dad0_0;
+    %load/vec4 v0x55ab1b53da10_0;
+    %and;
+    %or;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_0.6, 8;
+    %load/vec4 v0x55ab1b53db90_0;
+    %pad/u 5;
+    %ix/vec4 4;
+    %load/vec4a v0x55ab1b53d5b0, 4;
+    %assign/vec4 v0x55ab1b53d760_0, 0;
+    %load/vec4 v0x55ab1b53db90_0;
+    %addi 1, 0, 3;
+    %store/vec4 v0x55ab1b53db90_0, 0, 3;
+    %load/vec4 v0x55ab1b53dd30_0;
+    %load/vec4 v0x55ab1b53db90_0;
+    %cmp/e;
+    %jmp/0xz  T_0.8, 4;
+    %pushi/vec4 1, 0, 1;
+    %assign/vec4 v0x55ab1b53d840_0, 0;
+    %jmp T_0.9;
+T_0.8 ;
+    %pushi/vec4 0, 0, 1;
+    %assign/vec4 v0x55ab1b53d950_0, 0;
+T_0.9 ;
+T_0.6 ;
+T_0.1 ;
+    %jmp T_0;
+    .thread T_0;
+    .scope S_0x55ab1b51d2c0;
+T_1 ;
+    %vpi_call 2 50 "$dumpfile", "waveform.vcd" {0 0 0};
+    %vpi_call 2 51 "$dumpvars", 32'sb00000000000000000000000000000000, S_0x55ab1b51d2c0 {0 0 0};
+    %delay 100, 0;
+    %end;
+    .thread T_1;
+# The file index is used to find the file name in the following table.
+:file_names 3;
+    "N/A";
+    "<interactive>";
+    "/home/matt/work/cocotb/cocotb/examples/fifo/tests/../hw-experiments/simple_fifo.v";
